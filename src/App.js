@@ -8,12 +8,8 @@ function App() {
       <header>
         <nav>
           <h1>Manuwa</h1>
-          <NavLink to="/">
-            <button>Home</button>
-          </NavLink>
-          <NavLink to="about">
-            <button>About</button>
-          </NavLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="about">About</NavLink>
         </nav>
       </header>
       <main>

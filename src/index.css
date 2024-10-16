@@ -27,6 +27,29 @@ button {
 }
 
 /* navbar */
+header nav {
+  display: flex;
+  justify-content: end;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header h1 {
+  margin-right: auto;
+  border-bottom: 3px solid var(--primary);
+}
+
+header nav a {
+  text-decoration: none;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+header nav a.active {
+  background: var(--primary);
+  color: #fff;
+}
 
 /* page content */
 
