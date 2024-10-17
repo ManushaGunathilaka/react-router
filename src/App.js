@@ -1,9 +1,5 @@
 import {
-  BrowserRouter,
-  Routes,
   Route,
-  Link,
-  NavLink,
   createRoutesFromElements,
   RouterProvider,
   createBrowserRouter,
