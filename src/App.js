@@ -5,15 +5,19 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+//pages
 import Home from "./pages/Home";
 import About from "./pages/About";
-import RootLayout from "./layouts/RootLayout";
-import HelpLayout from "./layouts/HelpLayout";
 import Faq from "./pages/Help/Faq";
 import Contact from "./pages/Help/Contact";
 import NotFound from "./pages/NotFound";
+import Careers from "./pages/Careers/Careers";
+import CareerDetails from "./pages/Careers/CareerDetails";
+import CareersError from "./pages/Careers/CareersError";
+//layouts
+import RootLayout from "./layouts/RootLayout";
+import HelpLayout from "./layouts/HelpLayout";
 import CareersLayout from "./layouts/CareersLayout";
-import Careers, { careersLoader } from "./pages/Careers/Careers";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,9 +30,13 @@ const router = createBrowserRouter(
         <Route path="contact" element={<Contact />} />
       </Route>
 
-      <Route path="careers" element={<CareersLayout />}>
+      <Route
+        path="careers"
+        element={<CareersLayout />}
+        errorElement={<CareersError />}
+      >
         <Route index element={<Careers />} />
-        loader={careersLoader}
+        <Route path=":id" element={<CareerDetails />} />
       </Route>
 
       <Route path="*" element={<NotFound />} />

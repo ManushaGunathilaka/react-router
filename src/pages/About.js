@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
 
 const About = () => {
+  const [user, setUser] = useState("manu");
+
+  if (!user) {
+    return <Navigate to="/" replace={true} />;
+  }
   return (
     <div>
       <h1>About Us</h1>
@@ -25,6 +31,7 @@ const About = () => {
         If you would like to know more about our mission, vision, or the team
         behind the scenes, feel free to reach out!
       </p>
+      <button onClick={() => setUser(null)}>Logout</button>
     </div>
   );
 };

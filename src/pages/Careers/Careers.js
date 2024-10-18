@@ -1,38 +1,46 @@
-import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Careers = () => {
-  const careers = useLoaderData();
+  const [careers, setCareers] = useState([]);
+  const [error, setError] = useState(null);
 
-  // Ensure careers is defined and is an array
+  useEffect(() => {
+    const fetchCareers = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/careers");
+        if (!res.ok) {
+          throw new Error("Failed to fetch careers");
+        }
+        const data = await res.json();
+        setCareers(data);
+      } catch (error) {
+        setError(error.message);
+        throw error;
+      }
+    };
+
+    fetchCareers();
+  }, []);
+
+  if (error) {
+    throw new Error(error); // Ensure error is thrown here to trigger the error boundary
+  }
+
   return (
     <div className="careers">
-      {careers && careers.length > 0 ? ( // Check if careers is defined and has items
+      {careers.length > 0 ? (
         careers.map((career) => (
-          <Link to="/" key={career.id}>
+          <Link to={career.id.toString()} key={career.id}>
             <p>{career.title}</p>
             <p>Based in {career.location}</p>
           </Link>
         ))
       ) : (
-        <p>No careers available.</p> // Optional: Provide a message when no data
+        <p>No careers available.</p>
       )}
     </div>
   );
 };
 
 export default Careers;
-
-//loader function
-export const careersLoader = async () => {
-  try {
-    const res = await fetch("http://localhost:8000/careers");
-    if (!res.ok) {
-      throw new Error("Failed to fetch careers");
-    }
-    return await res.json();
-  } catch (error) {
-    console.error("Error loading careers:", error);
-    throw error; // Propagate error to show it in your UI
-  }
-};
